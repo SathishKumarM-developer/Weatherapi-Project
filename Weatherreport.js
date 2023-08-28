@@ -4,8 +4,6 @@ import axios from 'axios'
 function Weathers() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
-
-  //const url = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
  
  const searchLocation = (search) => 
   { 
@@ -20,9 +18,7 @@ function Weathers() {
   const handlesubmit=(event)=>{
         event.preventDefault();
         searchLocation(location)
-        
-
-  }
+   }
 
  return(<>
  {console.log(data)}
@@ -66,18 +62,10 @@ function Weathers() {
           </div>
         }
           
-        
-
-
-
       </div>
    
       </div>
-  
-  
-  </>)
-
-
+   </>)
 }
 
 
