@@ -1,11 +1,15 @@
 import React from 'react';
-import Weathers from './Weatherreport';
+import './App.css';
+import Weathers from './Weatherreport.js';
 
 function App() {
-  return(<>
+  return (<>{
+
     <Weathers></Weathers>
-    </>
-  )
+ 
+  }
+  
+  </>);
 }
 
 export default App;
