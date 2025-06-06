@@ -4,21 +4,26 @@ import axios from 'axios'
 function Weathers() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
+
+  //const url = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
  
- const searchLocation = (search) => 
-  { 
-    {axios.get('https://api.openweathermap.org/data/2.5/weather?units=metric&appid=a7c4e2f81d238476de5016691511ebde&q='+search)
-    .then((response) => {
-      setData(response.data)
-      console.log(response.data)
-    }) 
-    setLocation('')}
+
+  const searchLocation = (search) => {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&appid=a7c4e2f81d238476de5016691511ebde&q=${search}`) // ✅ Used template string
+      .then((response) => {
+        setData(response.data)
+        console.log(response.data)
+      })
+    setLocation('') 
   }
+ 
 
   const handlesubmit=(event)=>{
         event.preventDefault();
         searchLocation(location)
-   }
+        
+
+  }
 
  return(<>
  {console.log(data)}
@@ -33,14 +38,18 @@ function Weathers() {
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>{data.name}</p>
+            <p>{data.name ? data.name : null}</p>
           </div>
-          <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}/>
+          {data.weather?.[0]?.icon && (
+            <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+            alt="weather-icon"
+            />
+          )}
           <div className="temp">
-            {data.main ? <h1>{data.main.temp.toFixed()}°C</h1> : null}
+            {data.main ?. temp ? <h1>{data.main.temp.toFixed(0)}°C</h1> : null}
           </div>
           <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : null }
+            {data.weather ?.[0]?.main? <p>{data.weather[0].main}</p> : null }
           </div>
         </div>
         
@@ -62,12 +71,22 @@ function Weathers() {
           </div>
         }
           
+        
+
+
+
       </div>
    
       </div>
-   </>)
+  
+  
+  </>)
+
+
 }
 
 
 
 export default Weathers
+ 
+    
